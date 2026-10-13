@@ -1,0 +1,48 @@
+<%- include('../partials/header') %>
+<section class="page-heading compact-heading">
+  <div>
+    <p class="eyebrow">BOOK DETAILS</p>
+    <h1>查看图书信息</h1>
+  </div>
+</section>
+
+<section class="form-panel read-only-panel" aria-label="图书详细信息">
+  <div class="form-grid">
+    <div class="field-group">
+      <label>图书编号</label>
+      <output><%= book.bookCode %></output>
+    </div>
+    <div class="field-group">
+      <label>图书名称</label>
+      <output><%= book.bookName %></output>
+    </div>
+    <div class="field-group">
+      <label>图书类型</label>
+      <output><%= book.typeName %></output>
+    </div>
+    <div class="field-group">
+      <label>作者</label>
+      <output><%= book.bookAuthor || '—' %></output>
+    </div>
+    <div class="field-group">
+      <label>出版社</label>
+      <output><%= book.publishPress || '—' %></output>
+    </div>
+    <div class="field-group">
+      <label>是否借阅</label>
+      <output><%= book.borrowed ? '已借阅' : '未借阅' %></output>
+    </div>
+    <div class="field-group">
+      <label>入库人</label>
+      <output><%= book.createdBy %></output>
+    </div>
+    <div class="field-group">
+      <label>入库时间</label>
+      <output><%= formatDate(book.creationTime) %></output>
+    </div>
+  </div>
+  <div class="form-actions">
+    <a class="button button-secondary" href="<%= returnTo %>">返回</a>
+  </div>
+</section>
+<%- include('../partials/footer') %>

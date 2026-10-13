@@ -1,0 +1,25 @@
+{
+  "name": "book-backend-manage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "图书借阅系统后台管理",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "db:setup": "node scripts/setup-db.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mssql": "^11.0.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
+  }
+}
