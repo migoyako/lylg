@@ -1,0 +1,69 @@
+<%- include('../partials/header') %>
+<section class="page-heading compact-heading">
+  <div>
+    <p class="eyebrow"><%= mode === 'create' ? 'NEW BOOK' : 'EDIT BOOK' %></p>
+    <h1><%= mode === 'create' ? '新增图书信息' : '修改图书信息' %></h1>
+  </div>
+</section>
+
+<% if (notice) { %>
+  <div class="notice notice-<%= notice.type %>" role="alert"><%= notice.text %></div>
+<% } %>
+
+<form class="form-panel" method="post" action="<%= mode === 'create' ? '/books' : `/books/${bookId}` %>" data-book-form novalidate>
+  <input type="hidden" name="returnTo" value="<%= returnTo %>">
+  <div class="form-grid">
+    <div class="field-group <%= errors.bookCode ? 'has-error' : '' %>">
+      <label for="bookCode">图书编号 <span class="required">*</span></label>
+      <input id="bookCode" name="bookCode" value="<%= values.bookCode %>" maxlength="30" required>
+      <% if (errors.bookCode) { %><small class="field-error"><%= errors.bookCode %></small><% } %>
+    </div>
+    <div class="field-group <%= errors.bookName ? 'has-error' : '' %>">
+      <label for="bookName">图书名称 <span class="required">*</span></label>
+      <input id="bookName" name="bookName" value="<%= values.bookName %>" maxlength="100" required>
+      <% if (errors.bookName) { %><small class="field-error"><%= errors.bookName %></small><% } %>
+    </div>
+    <div class="field-group <%= errors.bookType ? 'has-error' : '' %>">
+      <label for="bookType">图书类型 <span class="required">*</span></label>
+      <select id="bookType" name="bookType" required>
+        <option value="">——请选择——</option>
+        <% types.forEach((type) => { %>
+          <option value="<%= type.id %>" <%= String(values.bookType) === String(type.id) ? 'selected' : '' %>><%= type.typeName %></option>
+        <% }); %>
+      </select>
+      <% if (errors.bookType) { %><small class="field-error"><%= errors.bookType %></small><% } %>
+    </div>
+    <div class="field-group">
+      <label for="bookAuthor">作者</label>
+      <input id="bookAuthor" name="bookAuthor" value="<%= values.bookAuthor %>" maxlength="100">
+    </div>
+    <div class="field-group">
+      <label for="publishPress">出版社</label>
+      <input id="publishPress" name="publishPress" value="<%= values.publishPress %>" maxlength="100">
+    </div>
+    <div class="field-group <%= errors.borrowed ? 'has-error' : '' %>">
+      <label for="borrowed">是否借阅 <span class="required">*</span></label>
+      <select id="borrowed" name="borrowed" required>
+        <option value="0" <%= String(values.borrowed) === '0' ? 'selected' : '' %>>未借阅</option>
+        <option value="1" <%= String(values.borrowed) === '1' ? 'selected' : '' %>>已借阅</option>
+      </select>
+      <% if (errors.borrowed) { %><small class="field-error"><%= errors.borrowed %></small><% } %>
+    </div>
+    <div class="field-group <%= errors.createdBy ? 'has-error' : '' %>">
+      <label for="createdBy">入库人 <span class="required">*</span></label>
+      <input id="createdBy" name="createdBy" value="<%= values.createdBy %>" maxlength="50" required <%= mode === 'edit' ? 'readonly' : '' %>>
+      <% if (errors.createdBy) { %><small class="field-error"><%= errors.createdBy %></small><% } %>
+    </div>
+    <div class="field-group <%= errors.creationTime ? 'has-error' : '' %>">
+      <label for="creationTime">入库时间 <span class="required">*</span></label>
+      <input id="creationTime" name="creationTime" type="datetime-local" value="<%= formatDateTimeInput(values.creationTime) %>" required <%= mode === 'edit' ? 'readonly' : '' %>>
+      <% if (errors.creationTime) { %><small class="field-error"><%= errors.creationTime %></small><% } %>
+    </div>
+  </div>
+  <p class="required-note"><span class="required">*</span> 为必填项</p>
+  <div class="form-actions">
+    <button class="button button-primary" type="submit"><%= mode === 'create' ? '保存' : '修改' %></button>
+    <a class="button button-secondary" href="<%= returnTo %>">返回</a>
+  </div>
+</form>
+<%- include('../partials/footer') %>

@@ -1,0 +1,21 @@
+name: 后端任务
+about: 图书借阅系统 Express 与 SQL Server 服务
+labels:
+  - backend
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: 目标
+      description: 说明需要完成的接口、数据访问和业务逻辑。
+    validations:
+      required: true
+  - type: checkboxes
+    id: acceptance
+    attributes:
+      label: 验收标准
+      options:
+        - label: 使用 Express 提供列表、查询、详情、新增、修改和删除能力
+          required: true
+        - label: 使用 SQL Server 持久化并附带可重复执行的建表和测试数据脚本
+          required: true
